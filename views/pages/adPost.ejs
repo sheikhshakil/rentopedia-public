@@ -1,0 +1,280 @@
+<%- include('../partials/header.ejs') %>
+
+<section class="postAd">
+  <div class="container py-5">
+    <div class="row mb-4">
+      <div class="col-md-9">
+        <h2>Post Advertisement</h2>
+      </div>
+
+      <div class="col-md-3">
+        <div class="text-center userType">For <%= seekerType %></div>
+      </div>
+    </div>
+
+    <div class="postAdForm">
+      <form action="/postAd" enctype="multipart/form-data" method="post">
+        <div class="mainPost row">
+          <div class="col-md-6">
+            <div>
+              <label class="form-label">Address information----</label>
+              <div class="form-group">
+                <select required name="division" class="form-select">
+                  <option selected>Choose Division</option>
+                  <option value="dhaka">Dhaka</option>
+                  <option value="chattogram">Chattogram</option>
+                  <option value="khulna">Khulna</option>
+                  <option value="barishal">Barishal</option>
+                  <option value="sylhet">Sylhet</option>
+                  <option value="rajshahi">Rajshahi</option>
+                  <option value="rangpur">Rangpur</option>
+                  <option value="mymensingh">Mymensingh</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <input
+                  name="town"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Town/City"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="thana"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Upazilla/Thana"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="resName"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Residence name"
+                />
+              </div>
+            </div>
+            <hr />
+            <div>
+              <label class="form-label">Billing information----</label>
+              <div class="form-group">
+                <input
+                  name="adPay"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Advance payment"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="monRent"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Monthly rent"
+                />
+              </div>
+              <% if (seekerType=="roommate" ) { %>
+              <div class="form-group">
+                <input
+                  name="sBill"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Servants bill"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="iBill"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Internet bill"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="mealCost"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Meal cost per day"
+                />
+              </div>
+
+              <% } else { %>
+              <div class="form-group">
+                <input
+                  name="wBill"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Water bill"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="gBill"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Gas bill"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="parkFee"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Parking fee"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="mtnCost"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Maintenance cost"
+                />
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div>
+              <label class="form-label">House information----</label>
+              <% if (seekerType=="roommate" ) { %>
+              <div class="form-group">
+                <input
+                  name="roomSize"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Room size (in sq-ft)"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="members"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Total members"
+                />
+              </div>
+              <% } else { %>
+              <div class="form-group">
+                <input
+                  name="area"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Total area (in sq-ft)"
+                />
+              </div>
+              <div class="form-group">
+                <select required name="bedroom" class="form-select">
+                  <option selected>Total bedrooms</option>
+                  <option value="1">01</option>
+                  <option value="2">02</option>
+                  <option value="3">03</option>
+                  <option value="4">04</option>
+                  <option value="5">05</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select required name="livingroom" class="form-select">
+                  <option selected>Total living rooms</option>
+                  <option value="1">01</option>
+                  <option value="2">02</option>
+                  <option value="3">03</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select required name="bathroom" class="form-select">
+                  <option selected>Total bathrooms</option>
+                  <option value="1">01</option>
+                  <option value="2">02</option>
+                  <option value="3">03</option>
+                  <option value="4">04</option>
+                  <option value="5">05</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select required name="balcony" class="form-select">
+                  <option selected>Total balcony</option>
+                  <option value="0">00</option>
+                  <option value="1">01</option>
+                  <option value="2">02</option>
+                  <option value="3">03</option>
+                  <option value="4">04</option>
+                  <option value="5">05</option>
+                </select>
+              </div>
+              <% } %>
+            </div>
+            <hr />
+            <div>
+              <label class="form-label">Contact information----</label>
+              <div class="form-group">
+                <input
+                  name="conNum"
+                  required
+                  type="text"
+                  class="form-control"
+                  placeholder="Mobile number"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  name="conEmail"
+                  required
+                  type="email"
+                  class="form-control"
+                  placeholder="Contact email"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="comments"
+                  class="form-control"
+                  placeholder="Additional comments"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="formFile" class="form-label mt-4">Add home photos</label>
+                <input class="form-control" multiple type="file" id="formFile">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <input
+          class="d-none"
+          name="seekerType"
+          value="<%= seekerType %>"
+          type="text"
+        />
+
+        <div class="text-center mt-4">
+          <button class="btn btn-primary" type="submit">
+            Post Advertisement
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer.ejs') %>

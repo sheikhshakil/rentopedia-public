@@ -1,0 +1,375 @@
+<%- include('../partials/header.ejs') %>
+
+<section class="profile">
+  <div class="container py-5">
+    <!-- header name and desig. -->
+    <% let hasApproved = false %> 
+    <div class="row mb-4">
+      <div class="col-md-10">
+        <h2>Welcome</h2>
+        <h4 id="userName"><%= user.fullName %></h4>
+      </div>
+
+      <div class="col-md-2">
+        <div class="text-center userType">House <%= user.userType %></div>
+      </div>
+    </div>
+
+    <!-- profile actions -->
+    <div class="row actions">
+      <div class="col-md-8 ">
+        <div class="action">
+          <% if (user.userType=="owner" ) { %>
+
+          <!-- select ad type form -->
+          <div>
+            <h5 class="actionHead">Post a House Ad</h5>
+            <hr />
+            <!-- form -->
+            <form action="/initPostAd" method="post">
+              <div>Choose house seeker type:</div>
+              <fieldset>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      required
+                      type="radio"
+                      class="form-check-input"
+                      name="seekerType"
+                      value="bachelor"
+                    />
+                    Bachelor
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      required
+                      type="radio"
+                      class="form-check-input"
+                      name="seekerType"
+                      value="family"
+                    />
+                    Family
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      required
+                      type="radio"
+                      class="form-check-input"
+                      name="seekerType"
+                      value="bachelor & family"
+                    />
+                    Bachelor or Family
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      required
+                      type="radio"
+                      class="form-check-input"
+                      name="seekerType"
+                      value="roommate"
+                    />
+                    Room mate
+                  </label>
+                </div>
+              </fieldset>
+              <div class="mt-4">
+                <button type="submit" class="btn btn-sm btn-primary">
+                  Next
+                </button>
+              </div>
+            </form>
+
+            <% if (adPostSuccess) { %>
+            <div role="alert" class="alert alert-success successAlert">
+              <b>Success</b>
+              <p>Your ad is posted successfully!</p>
+            </div>
+            <% } %>
+            <% if (adDeleteSuccess) { %>
+              <div role="alert" class="alert alert-danger successAlert">
+                <b>Success</b>
+                <p>Your ad is deleted successfully!</p>
+              </div>
+            <% } %>
+          </div>
+
+          <% } else { %>
+          <h5 class="actionHead">Sent requests</h5>
+          <hr />
+          <% if (bookedAdsDetails.length > 0) { %>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="table-dark">
+                  <th>House type</th>
+                  <th>Residence address</th>
+                  <th>Monthly rent</th>
+                  <th>Booked on</th>
+                  <th>Request status</th>
+                </thead>
+                <tbody>
+                  <% bookedAdsDetails.forEach(bookedAd=> { %>
+                  <% if (bookedAd.isDeleted) { %>
+                   <tr>
+                     <td>N/A</td>
+                     <td>N/A</td>
+                     <td>N/A</td>
+                     <td><%= `${new Date(bookedAd.bookedOn._seconds*1000).toDateString()} at ${ new Date(bookedAd.bookedOn._seconds*1000).toLocaleTimeString()}` %></td>
+                     <td>
+                       <button class="btn btn-danger btn-sm disabled w-100"><%= bookedAd.status %></button>
+                       <p class="mt-2">Ad deleted by house owner!</p>
+                      </td>
+                   </tr>
+                  <% } else { %>
+                    <!-- ad exists -->
+                    <tr>
+                      <td>
+                        <div id="houseType">
+                          <%= bookedAd.adData.seekerType %>
+                        </div>
+                      </td>
+                      <td><%= `${bookedAd.adData.resName}, ${bookedAd.adData.thana}, ${bookedAd.adData.town}` %></td>
+                      <td><%= bookedAd.adData.monRent %></td>
+                      <td>
+                        <%= `${new Date(bookedAd.bookedOn._seconds*1000).toDateString()} at ${ new Date(bookedAd.bookedOn._seconds*1000).toLocaleTimeString()}` %>
+                      </td>
+                      <td>
+                        <div id="bookStatus">
+                          <%= bookedAd.status %>
+                          <% if (bookedAd.status == 'approved') { %>
+                            <% hasApproved = true %> 
+                          <% } %>
+                        </div>
+                        <div class="">
+                          <a class="btn btn-primary btn-sm w-100" href="/showAdDetails?adId=<%= bookedAd.adData.id %>">Details</a>
+                        </div>
+                      </td>
+                    </tr>
+                  <% } %>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          <% } else { %>
+            You have not booked any house till now.
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- edit profile part -->
+      <div class="col-md-4">
+        <div class="action">
+          <div>
+            <h5 class="actionHead">Edit profile</h5>
+            <hr />
+
+            <!-- email -->
+            <div>
+              <p>Email : <i> <%= user.email %> </i></p>
+              <button
+                class="btn btn-primary btn-sm w-100"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#updateEmail"
+              >
+                Update Email
+              </button>
+              <div class="collapse" id="updateEmail">
+                <div class="mt-3">
+                  <form action="/updateEmail" method="post">
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        name="newEmail"
+                        class="form-control"
+                        placeholder="Enter new email address"
+                      />
+                    </div>
+                    <div>
+                      <button class="btn btn-danger btn-sm" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+
+            <!-- pass -->
+            <div>
+              <button
+                class="btn btn-primary btn-sm w-100"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#changePass"
+              >
+                Change password
+              </button>
+              <div class="collapse" id="changePass">
+                <div class="mt-3">
+                  <form action="/changePass" method="post">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        name="newPass"
+                        class="form-control"
+                        placeholder="Enter new password"
+                      />
+                    </div>
+                    <div>
+                      <button class="btn btn-danger btn-sm" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% if (user.userType == 'seeker') { %>
+            <div class="mt-5">
+              <h5 class="actionHead">Wishlists</h5>
+              <hr>
+              <% if (user.wishlist) { %>
+                <% user.wishlist.forEach((wish, i) => { %>
+                  <div>
+                    <p><%= i+1 %>. <a class="wish" href="/showAdDetails?adId=<%= wish.adId %>">
+                     An ad posted by <%= wish.ownerName %>, located in <%= wish.thana %>, <%= wish.division %>.
+                   </a></p>
+                  </div>
+                 <% }) %>
+              <% } else { %>
+                <p>No wishlists so far.</p>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- owner ads list -->
+    <% if (user.userType=="owner" ) { %>
+    <div class="postedAds">
+      <h4>Ads you've posted previously</h4>
+      <% if (postedAds) { %>
+      <div class="table-responsive mt-3">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <th>Posted for</th>
+            <th>Residence address</th>
+            <th>Monthly rent</th>
+            <th>Posted on</th>
+            <th>Status</th>
+            <th>Booking Requests</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <% postedAds.forEach(ad=> { %>
+            <tr>
+              <td><%= ad.seekerType %></td>
+              <td><%= `${ad.resName}, ${ad.thana}, ${ad.town}` %></td>
+              <td><%= ad.monRent %></td>
+              <td>
+                <%= `${new Date(ad.postedOn._seconds*1000).toDateString()} at ${ new Date(ad.postedOn._seconds*1000).toLocaleTimeString()}` %>
+              </td>
+              <td>
+                <a href="#" class="btn btn-sm btn-primary disabled"><%= ad.status %></a>
+              </td>
+              <td>
+                <%= ad.bookings.length %>
+              </td>
+              <td>
+                <form action="/showAdDetails" method="get">
+                  <input
+                    class="d-none"
+                    value="<%= ad.id %>"
+                    name="adId"
+                    type="text"
+                  />
+                  <button class="btn btn-primary btn-sm mb-2">
+                    Details
+                  </button>
+                </form>
+
+                <div>
+                  <a href="/deleteAd?adId=<%= ad.id %>" class="btn btn-danger btn-sm <%= ad.status == 'booked' ? 'disabled' : '' %>">Delete</a>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <% } else { %>
+      <p class="text-dark mt-3">No ads posted by you so far!</p>
+      <% } %>
+    </div>
+
+    <!-- seeker homes list -->
+    <% } else { %>
+      <div class="seekerHomes mt-4">
+        <h4>Your house list</h4>
+        <hr>
+        <% if (hasApproved) { %>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-dark">
+                <th>House type</th>
+                <th>Residence address</th>
+                <th>Advance payment</th>
+                <th>Monthly rent</th>
+                <th>Owner name</th>
+                <th>Booked on</th>
+                <th>Action</th>
+              </thead>
+              <tbody>
+                <% bookedAdsDetails.forEach(bookedAd=> { %>
+                <% if (bookedAd.status == 'approved') { %>
+                  <tr>
+                    <td>
+                      <div id="houseType">
+                        <%= bookedAd.adData.seekerType %>
+                      </div>
+                    </td>
+                    <td><%= `${bookedAd.adData.resName}, ${bookedAd.adData.thana}, ${bookedAd.adData.town}` %></td>
+                    <td><%= bookedAd.adData.adPay %></td>
+                    <td><%= bookedAd.adData.monRent %></td>
+                    <td><%= bookedAd.adData.ownerName %></td>
+                    <td>
+                      <%= `${new Date(bookedAd.bookedOn._seconds*1000).toDateString()} at ${ new Date(bookedAd.bookedOn._seconds*1000).toLocaleTimeString()}` %>
+                    </td>
+                    <td>
+                      <a href="/showAdDetails?adId=<%= bookedAd.adData.id %>" class="btn btn-sm btn-outline-primary w-100">House details</a>
+                    </td>
+                  </tr>
+                <% } %>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <div class="text-dark">None of your booking requests is approved till now!</div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- for showing noti -->
+<script>
+  $().ready(function () {
+    $("div.alert").delay(3000);
+    $("div.alert").hide(1000);
+  });
+</script>
+
+<%- include('../partials/footer.ejs') %>

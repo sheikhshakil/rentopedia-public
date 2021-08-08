@@ -1,0 +1,155 @@
+<%- include('../partials/header.ejs') %>
+
+<section class="auth-bg">
+  <div class="container py-5">
+    <% if (action=="login" ) { %>
+    <h2 class="text-white text-center">Login to your account</h2>
+
+    <% if (error) { %>
+    <div class="alert errorAlert py-3 col-md-6 mx-auto">
+      <h6 class="text-white"><%= error %>!</h6>
+      <% if (error = "login first") { %>
+      <div>Please login before performing this action.</div>
+      <% } else { %>
+      <div>Make sure the data you entered is correct.</div>
+      <% } %>
+    </div>
+    <% } %>
+
+    <div class="form text-white">
+      <form action="/login" method="post">
+        <div class="form-group mb-3">
+          <label for="userType" class="form-label mt-4">Login as - </label>
+          <select name="userType" required class="form-select" id="userType">
+            <option value="owner">House owner</option>
+            <option value="seeker">House seeker</option>
+          </select>
+        </div>
+        <div class="form-group mb-3">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control mb-1"
+            name="email"
+            required
+            id="email"
+            placeholder="Enter your email"
+          />
+          <small id="emailHelp" class="form-text text-success"
+            >We'll never share your email with anyone else.</small
+          >
+        </div>
+        <div class="form-group mb-3">
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            required
+            id="pass"
+            placeholder="Enter your password"
+          />
+        </div>
+        <div class="text-center mt-5">
+          <button class="btn btn-outline-success" type="submit">
+            <i class="ui-icon fas fa-arrow-circle-right"></i>Proceed
+          </button>
+        </div>
+      </form>
+      <div class="mt-4">
+        <p>
+          Don't have an account? Register
+          <a class="help-link" href="/register">here</a>
+        </p>
+      </div>
+    </div>
+
+    <% } else if (action=="register" ) { %>
+    <h2 class="text-white text-center">Register in Rentopedia</h2>
+    <div class="form text-white">
+      <form action="/register" method="post">
+
+        <div class="form-group mb-3">
+          <label for="userType" class="form-label mt-4">Register as - </label>
+          <select name="userType" required class="form-select" id="userType">
+            <option value="owner">House owner</option>
+            <option value="seeker">House seeker</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="name">Full name</label>
+          <input
+            type="text"
+            name="fullName"
+            required
+            class="form-control <%= errors.fullName ? 'is-invalid' : ''%>"
+            id="name"
+            placeholder="Enter your name"
+          />
+          <div class="invalid-feedback"><%= errors.fullName %></div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="form-control mb-1 <%= errors.email ? 'is-invalid' : ''%>"
+            id="email"
+            placeholder="Enter your email"
+          />
+          <div class="invalid-feedback"><%= errors.email %></div>
+          <small id="emailHelp" class="form-text text-success"
+            >We'll never share your email with anyone else.</small
+          >
+        </div>
+        <div class="form-group mb-3">
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            name="password"
+            required
+            class="form-control <%= errors.password ? 'is-invalid' : ''%>"
+            id="pass"
+            placeholder="Password"
+          />
+          <div class="invalid-feedback"><%= errors.password %></div>
+        </div>
+
+        <div>
+          <label>Gender</label>
+
+          <div class="form-group mb-3">
+            <select
+              name="gender"
+              class="form-select <%= errors.gender ? 'is-invalid' : ''%>"
+            >
+              <option value="" selected>Choose your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="invalid-feedback"><%= errors.gender %></div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <button class="btn btn-outline-warning" type="submit">
+            <i class="ui-icon fas fa-check-circle"></i>Register
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-4">
+        <p>
+          Already have an account? Login
+          <a class="help-link" href="/login">here</a>
+        </p>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer.ejs') %>

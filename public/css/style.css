@@ -1,0 +1,408 @@
+@import "bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+
+:root {
+  --color-text: rgb(241, 241, 241);
+  --color-primary: #e09e42;
+  --color-primary-dark: #bd863a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav-item,
+.navForm,
+.dropdown-item {
+  font-size: 12px;
+}
+
+nav,
+footer {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.home-bg {
+  background-image: url("bg.jpg");
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.home-bg .navbar {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(0.5rem);
+}
+
+.navbar-brand {
+  font-family: "Architects Daughter", cursive;
+  font-size: 20px;
+}
+
+footer p {
+  color: var(--color-text);
+}
+
+.intro {
+  margin-top: 8rem;
+  padding: 2rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(0.5rem);
+  position: relative;
+  z-index: 10;
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.intro h2 {
+  font-size: 30px;
+  color: var(--color-text);
+}
+
+.services {
+  background-image: url("bg-2.svg");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#services-head {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(0.5rem);
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-text);
+}
+
+.services .row {
+  justify-content: space-between;
+}
+
+.services .card {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.5)
+  );
+  backdrop-filter: blur(1rem);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.card .icon {
+  font-size: 2.5rem;
+  text-align: center;
+  color: rgb(126, 255, 165);
+}
+
+/* auth page */
+.auth-bg {
+  background-image: url("auth-bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.form {
+  width: 70%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+  border: 1px solid var(--color-text);
+  backdrop-filter: blur(1rem);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.help-link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.help-link:hover {
+  color: var(--color-primary-dark);
+}
+
+.ui-icon {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.errorAlert {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: var(--color-text);
+  margin-top: 1.2rem;
+  backdrop-filter: blur(1rem);
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.successAlert {
+  margin-top: 1.2rem;
+  backdrop-filter: blur(1rem);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.invalid-feedback {
+  color: rgb(255, 161, 161);
+}
+
+/* profile page styles */
+.profile {
+  color: #000;
+  background-image: url("profile-bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+#userName {
+  color: var(--color-primary);
+  background-color: #221900;
+  width: fit-content;
+  padding: 1rem 1.5rem;
+  border: 1px solid #fff;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.actionHead {
+  color: #0043d4;
+}
+
+h2,
+h4,
+h5 {
+  color: var(--color-text);
+}
+
+.userType {
+  background-color: var(--color-primary);
+  padding: 0.5rem;
+  color: rgb(24, 24, 24);
+  font-size: 16px;
+  border: 1px solid #fff;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.action, .postedAds, .bookingReqs, .seekerHomes {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(1rem);
+  padding: 1.5rem;
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.action {
+  height: 100%;
+}
+
+#bookStatus, #houseType, .adStatus {
+  background-color: #ffab34;
+  color: #000;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #000;
+  width: 100%;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.wish {
+  text-decoration: none;
+  color: #9c5b00;
+}
+.wish:hover {
+  color: #cf7900;
+}
+
+#houseType {
+  background-color: rgb(255, 59, 59);
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/* posted ads part profile */
+.postedAds h4, .bookingReqs h4, .seekerHomes h4 {
+  color: #0043d4;
+}
+
+
+.postedAds tbody, .bookingReqs tbody, .seekerHomes tbody {
+  color: #222222;
+  text-transform: capitalize;
+}
+
+.postedAds {
+  margin-top: 2rem;
+}
+
+/* ad post */
+.postAd {
+  background-image: url("postAdBg.svg");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.postAdForm {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(1rem);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.postAdForm .form-group {
+  margin-bottom: 0.5rem;
+}
+
+.mainPost {
+  justify-content: space-around;
+}
+
+/* explore page styles */
+.explore, .filterAds {
+  background-image: url('./explore-bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 90vh;
+}
+
+.adFilter {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(1rem);
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.adFilter h5 {
+  margin-bottom: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.adContainer {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(1rem);
+  padding: 1rem;
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+.adRowHolder {
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+.adContainer h6 {
+  font-size: 0.9rem;
+  font-family: "Architects Daughter", cursive;
+}
+
+.adContainer img {
+  border: 1px solid black;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.adContainer p {
+  color: black;
+}
+
+.adContainer .col-md-7 span {
+  font-family: "Architects Daughter", cursive;
+  font-weight: 600;
+}
+
+#filterBtn {
+  text-align: right;
+}
+
+
+/* ad details page */
+.adDetails {
+  background-image: url('./adDetailsBg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 90vh;
+}
+
+tbody {
+  color: #000;
+}
+
+.adStatus {
+  width: fit-content;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+}
+
+.bookingReqs {
+  margin-top: 1rem;
+}
+
+.error {
+  height: 80vh;
+}
+
+.previewDiv, .detailsDiv {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(0.8rem);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
+.preview, .thumbs {
+  border: 1px solid var(--color-text);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.detailsDiv {
+  color: var(--color-text);
+}
+
+.detailsDiv p {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.detailsDiv span {
+  font-weight: 700;
+  color: rgb(0, 0, 179);
+}
+
+@media (max-width: 992px) {
+  .form {
+    width: 100%;
+    backdrop-filter: blur(2rem);
+  }
+  .actions .col-md-4 {
+    margin-top: 1rem;
+  }
+
+  .adFilter .form-group {
+    margin-bottom: 0.5rem;
+  }
+  .adDetails .col-md-6 {
+    margin-top: 1rem;
+  }
+  .postedAds {
+    margin-top: 1rem;
+  }
+}
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+    <title>Rentopedia</title>
+  </head>
+
+  <body>
+    <header class="home-bg pb-5">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">Rentopedia</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navLinks"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navLinks">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="/">Home </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/explore">Explore</a>
+              </li>
+
+              <% if (user) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Log out</a>
+                </li>
+              <% } else { %>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >My Account</a
+                  >
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/register">Register</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/login">Login</a>
+                  </div>
+                </li>
+              <% } %>
+            </ul>
+            <form action="/filterAds" method="GET" class="d-flex">
+              <div class="form-group mr-2">
+                <select name="division" class="form-select">
+                    <option value="" selected>Search houses by division</option>
+                    <option value="dhaka">Dhaka</option>
+                    <option value="chattogram">Chattogram</option>
+                    <option value="khulna">Khulna</option>
+                    <option value="barishal">Barishal</option>
+                    <option value="sylhet">Sylhet</option>
+                    <option value="rajshahi">Rajshahi</option>
+                    <option value="rangpur">Rangpur</option>
+                    <option value="mymensingh">Mymensingh</option>
+                </select>
+              </div>
+              <button class="btn btn-warning ml-3 navForm" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="col-md-7 intro">
+          <h2>The leading home rental and booking platform in Bangladesh</h2>
+        </div>
+      </div>
+    </header>
+
+    <section class="services">
+      <div class="container py-5">
+        <div class="mb-5" id="services-head">
+          <h3 class="text-white">Why we are special?</h3>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <i class="icon bi bi-shield-fill-check"></i>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Verified Ads</h4>
+                <p class="card-text">
+                  Advertisement of homes comes from real users and we always
+                  work to protect any spam.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <i class="icon bi bi-bag-check-fill"></i>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Safe booking</h4>
+                <p class="card-text">
+                  Book homes online safely by our safety ensuring process
+                  ensures tranparency within each transaction.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <i class="icon bi bi-award-fill"></i>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Trusted platform</h4>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <i class="icon bi bi-chat-dots-fill"></i>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">24/7 Support</h4>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
+                  voluptatem ut incidunt.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <i class="icon bi bi-broadcast-pin"></i>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Wide Support Area</h4>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Dolores repudiandae, quae quibusdam nemo.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header text-center">
+                <i class="icon bi bi-bookmark-heart-fill"></i>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Loved by millions</h4>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+                  illum quas a repudiandae necessitatibus.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-primary py-5 px-3">
+      <div class="text-center">
+        <p>Developed by C181017 and C181006</p>
+        <p>6AM</p>
+      </div>
+    </footer>
+  </body>
+</html>

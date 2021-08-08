@@ -1,0 +1,109 @@
+<%- include('../partials/header.ejs') %>
+<section class="py-5 filterAds">
+  <div class="container">
+    <% let hasWished = false %>
+    <h4 class="mb-3">Search results for houses</h4>
+    
+    <% if (ads) { %>
+    <div class="adRowHolder mt-4">
+            <% ads.forEach(ad => { %>
+                <% if (ad.status == 'available') { %>
+                    <div class="adContainer mb-3 row">
+                        <div class="col-md-3">
+                            <img class="img-fluid" src="<%= ad.photoUrls[0] %>" alt="Ad image">
+                            <h6 class="text-center mt-3">Home preview</h6>
+                        </div>
+                        <div class="col-md-7 text-center">
+                            <h6>For <%= ad.seekerType %></h6>
+                            <hr>
+                            <div class="text-left mt-3">
+                                <p><span>ADDRESS - </span><%= ad.resName %>, <%= ad.thana %>, <%= ad.town %></p>
+                                
+                                <% if (ad.seekerType == 'roommate') { %>
+                                    <p><span>ROOM SIZE - </span><%= ad.roomSize %> sq. ft.</p>
+                                    <p><span>ROOM MEMBERS - </span><%= ad.members %> person(s)</p>
+                                <% } else { %>
+                                    <p><span>TOTAL AREA - </span><%= ad.area %> sq. ft.</p>
+                                    <p><span>ROOM SUMMARY - </span>Bedroom : <%= ad.bedroom %> | Living room : <%= ad.livingroom %> | Washroom : <%= ad.bathroom %></p>
+                                <% } %>
+        
+                                <p><span>BILL SUMMARY - </span>Monthly rent : <%= ad.monRent %> <i>*May include more costs | See details*</i></p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <% if (user) { %>
+                                <h6 class="text-center">Actions</h6>
+                                <div class="mt-3">
+                                    <a href="/showAdDetails?adId=<%= ad.id %>" class="w-100 btn btn-sm btn-success <%= user.userType == 'owner' ? 'disabled' : '' %>">See Details</a>
+                                </div>
+
+                                <% if (user.userType == 'seeker') { %>
+                                    <% if (user.wishlist) { %>
+                                        <% user.wishlist.forEach(wish => { %>
+                                            <% if (wish.adId == ad.id) { %>
+                                             <% hasWished = true %> 
+                                            <% } %>
+                                        <% }) %>
+                                    <% } %>
+                                <% } %>
+
+                                <% if (user.userType == 'seeker') { %>
+                                    <% if (!hasWished) { %>
+                                        <div class="mt-2">
+                                            <form action="/wishlist" method="post">
+                                                <input type="text" name="adId" value="<%= ad.id %>" class="d-none">
+                                                <input type="text" name="ownerName" value="<%= ad.ownerName %>" class="d-none">
+                                                <input type="text" name="division" value="<%= ad.division %>" class="d-none">
+                                                <input type="text" name="thana" value="<%= ad.thana %>" class="d-none">
+    
+                                                <fieldset>
+                                                    <button id="wishlist" type="submit" class="w-100 btn btn-primary btn-sm">Add to wishlist</button>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    <% } else { %>
+                                        <div class="mt-2">
+                                            <button class="btn-primary btn disabled btn-sm w-100">Wishlisted</button>
+                                        </div>
+                                    <% } %>
+                                <% } else { %>
+                                    <div class="mt-2">
+                                        <button class="btn-primary btn disabled btn-sm w-100">Add to wishlist</button>
+                                    </div>
+                                <% } %>
+
+                            <% if (user.userType == "owner") { %>
+                                <p class="mt-2">
+                                    *Only available for house seekers*
+                                </p>
+                            <% } %>
+        
+                            <% } else { %>
+                                <h6>Actions</h6>
+                                <div class="mt-3">
+                                    <a href="/showAdDetails?adId=<%= ad.id %>" class="w-100 btn btn-sm btn-success">See Details</a>
+                                </div>
+                                <div class="mt-2">
+                                    <form action="/wishlist" method="post">
+                                        <input type="text" name="adId" value="<%= ad.id %>" class="d-none">
+                                        <input type="text" name="ownerName" value="<%= ad.ownerName %>" class="d-none">
+                                        <input type="text" name="division" value="<%= ad.division %>" class="d-none">
+                                        <input type="text" name="thana" value="<%= ad.thana %>" class="d-none">
+
+                                        <fieldset>
+                                            <button id="wishlist" type="submit" class="w-100 btn btn-primary btn-sm">Add to wishlist</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
+            <% }) %>
+    </div>
+
+    <% } %>
+
+  </div>
+</section>
+<%- include('../partials/footer.ejs') %>
